@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/head.ejs %>
+    <link rel="stylesheet" href="/css/chat.css">
+    <style>
+      div#chat-header{
+        background-color: <%= data.color %>;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="chat-box">
+        <div id="chat-header">
+          <span onclick="history.go(-1)" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <h1>Fischer Chat</h1>
+        </div>
+        <div id="messages">
+          <ul id="msgs"></ul>
+        </div>
+        <form action="" class="form-inline" id="msg-input">
+          <div class="row">
+            <div class="col-xs-10 form">
+                <input id="m" type="text" class="form-control" style="float:left" autofocus autocomplete="off">
+            </div>
+            <div class="col-xs-2 but">
+              <button class="btn btn-primary" style="float:right">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+
+    <% include partials/footer.ejs %>
+    <% include partials/config.ejs %>
+    <script src="/js/chat.js"></script>
+
+    <!-- Socket.IO Config -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      $("form").submit(function(){
+        if($("#m").val() != ""){
+          $("#msgs").append($("<li>").html("<strong style='color:<%=data.color%>'> <%=data.nick%>:</strong> " + $("#m").val()));
+          socket.emit("chat message", {msg: $("#m").val(), nick: "<%=data.nick%>", color: "<%=data.color%>"});
+          $("#m").val('');
+        }
+        return false;
+      });
+
+      socket.on("chat message", function(data){
+        $("#msgs").append($("<li>").html(`<strong style='color:${data.color}'>${data.nick}: </strong>${data.msg}`));
+      });
+    </script>
+
+  </body>
+</html>
