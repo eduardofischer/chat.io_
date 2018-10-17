@@ -18,26 +18,22 @@ app.get("/", function(req, res){
 });
 
 app.post("/entrar", function(req, res){
-  console.log(req.body);
   res.render("chat", {data: req.body});
 });
 
 //Socket.IO
 io.on("connection", function(socket){
-  var clientIp = socket.request.connection.remoteAddress.replace(/^.*:/, '');
-  if(clientIp == 1) clientIp = "127.0.0.1";
-  // console.log(`New user CONNECTED: ${clientIp}`);
-
   socket.on("chat message", function(data){
-    socket.broadcast.emit("chat message", {msg: data.msg, nick: data.nick, color: data.color});
+    io.emit("chat message", {msg: data.msg, nick: data.nick, color: data.color});
   });
 
-  socket.on('disconnect', function(){
-    // console.log('A user DISCONNECTED');
+  socket.on('disconnect', function(data){
+    console.log(data);
   });
 });
 
 //Server listen
-http.listen(3000, function(){
-  console.log("Server up and running at port 3000");
+const port = 3000;
+app.listen(port, function(){
+  console.log(`Server up and running at http://localhost:${port}`);
 });
