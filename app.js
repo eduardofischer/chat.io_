@@ -26,10 +26,6 @@ io.on("connection", function(socket){
   socket.on("chat message", function(data){
     io.emit("chat message", {msg: data.msg, nick: data.nick, color: data.color});
   });
-
-  socket.on('disconnect', function(data){
-    console.log(data);
-  });
 });
 
 //Server listen
