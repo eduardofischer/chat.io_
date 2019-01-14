@@ -24,12 +24,12 @@ app.post("/entrar", function(req, res){
 //Socket.IO
 io.on("connection", function(socket){
   socket.on("chat message", function(data){
-    io.emit("chat message", {msg: data.msg, nick: data.nick, color: data.color});
+    socket.broadcast.emit("chat message", {msg: data.msg, nick: data.nick, color: data.color});
   });
 });
 
 //Server listen
 const port = 3000;
-app.listen(port, function(){
+http.listen(port, function(){
   console.log(`Server up and running at http://localhost:${port}`);
 });
