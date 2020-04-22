@@ -1,4 +1,4 @@
-# chat.io_
+# chat.io
 
 ![Screen](http://i64.tinypic.com/307rkma.jpg)
 

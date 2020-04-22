@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <% include partials/head.ejs %>
+      <%- include('partials/head.ejs') %>
       <link rel="stylesheet" href="/css/chat.css">
   </head>
   <body>
@@ -9,7 +9,7 @@
       <div id="chat-box">
         <div id="chat-header">
           <span onclick="history.go(-1)" class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <h1>chat.io_</h1>
+          <h1>chat.io</h1>
         </div>
         <div id="messages">
           <ul id="feed"></ul>
@@ -32,7 +32,7 @@
     <!-- Socket.IO Config -->
     <script src="/socket.io/socket.io.js"></script>
 
-    <% include partials/footer.ejs %>
+    <%- include('partials/footer.ejs') %>
     <script src="/js/chat.js"></script>
   </body>
 </html>
