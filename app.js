@@ -29,7 +29,7 @@ io.on("connection", function(socket){
 });
 
 //Server listen
-const port = 3000;
+const port = node.env.PORT || 3000;
 http.listen(port, function(){
-  console.log(`Server up and running at http://localhost:${port}`);
+  console.log("Server up and running");
 });
