@@ -1,6 +1,6 @@
 # chat.io
 
-![Screen](http://i64.tinypic.com/307rkma.jpg)
+[Live Demo](https://ef-chat.herokuapp.com/)
 
 A simple, beautiful and fast *Node.js* chat room.
 
